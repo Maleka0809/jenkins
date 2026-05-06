@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    
+    tools {
+        sonarQubeScanner 'sonar-scanner'
+    }
 
     stages {
         stage('Clone Repository') {
@@ -11,10 +15,8 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                
                 withSonarQubeEnv('SonarQube') {
                     echo 'Memulai analisis SonarQube...'
-                
                     sh 'sonar-scanner'
                 }
             }
