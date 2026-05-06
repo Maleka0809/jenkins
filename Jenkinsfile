@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    
-    tools {
-        sonarQubeScanner 'sonar-scanner'
+
+
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'
     }
 
     stages {
@@ -17,7 +18,8 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     echo 'Memulai analisis SonarQube...'
-                    sh 'sonar-scanner'
+                    // Jalankan scanner dari lokasi instalasinya
+                    sh "${SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
         }
